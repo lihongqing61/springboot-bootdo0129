@@ -6,6 +6,8 @@ import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @Auther: Lihq
@@ -27,6 +29,21 @@ public class ShiroConfig {
 
         //1. 设置安全管理器
         bean.setSecurityManager(securityManager);
+
+        bean.setLoginUrl("/login");
+        bean.setSuccessUrl("/index");
+        bean.setUnauthorizedUrl("403");
+        Map<String, String> filterChainMap = new HashMap<>();
+        filterChainMap.put("/login", "anon");
+        filterChainMap.put("/css/**", "anon");
+        filterChainMap.put("/docs/**", "anon");
+        filterChainMap.put("/editor-app/**", "anon");
+        filterChainMap.put("/fonts/**", "anon");
+        filterChainMap.put("/img/**", "anon");
+        filterChainMap.put("/js/**", "anon");
+        filterChainMap.put("/css/**", "anon");
+        filterChainMap.put("/**", "authc");             // 全部拦截
+        bean.setFilterChainDefinitionMap(filterChainMap);
         return bean;
     }
 

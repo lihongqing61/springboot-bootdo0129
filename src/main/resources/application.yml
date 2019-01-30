@@ -13,3 +13,10 @@ spring:
   profiles:
     active:
       - dev
+
+mybatis:
+  mapper-locations:       # 指定mybatis配置sql路径
+    - mybatis/**/*Dao.xml
+  type-aliases-package: com.bootdo    #mybatis包
+  configuration:
+    mapUnderscoreToCamelCase: true    # 自动转驼峰
