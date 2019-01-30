@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration  scan="true" scanPeriod="60 seconds" debug="false">
+    <contextName>logback</contextName>
+
+    <!-- 文件输出到控制台 以及输出的格式 -->
+    <appender name="consoleLog" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>%d [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </layout>
+    </appender>
+
+    <!-- 此是文件info级别的输出 -->
+    <appender name="fileInfoLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>DEBUG</level>
+        </filter>
+
+        <!-- 添加了此拦截 则只匹配低于ERROR级别的日志 不添加则会拦截info级别以上的日志 -->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <!--要拦截的日志级别-->
+            <level>ERROR</level>
+            <!--如果匹配，则禁止-->
+            <onMatch>DENY</onMatch>
+            <!--如果不匹配，则允许记录-->
+            <onMismatch>ACCEPT</onMismatch>
+        </filter>
+        <encoder>
+            <pattern>%d [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+        <!--滚动策略-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--路径 每天在e盘生成一个文件 名称比如为: log-2018-12-19.log -->
+            <fileNamePattern>e:/bootdo_log/info-%d.log</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+
+    <!-- 此是文件error级别的输出 -->
+    <appender name="fileErrorLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter>
+        <encoder>
+            <pattern>%d [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+        <!--滚动策略-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--路径 每天在e盘生成一个文件 名称比如为: log-2018-12-19.log -->
+            <fileNamePattern>e:/bootdo_log/error-%d.log</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+    <!-- root：根节点，表明整个项目基本的日志级别，里面可以应用多个appender规则 -->
+    <root level="info">
+        <appender-ref ref="consoleLog"></appender-ref>
+        <appender-ref ref="fileInfoLog"></appender-ref>
+        <appender-ref ref="fileErrorLog"></appender-ref>
+    </root>
+</configuration>

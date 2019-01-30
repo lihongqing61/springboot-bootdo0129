@@ -20,3 +20,8 @@ mybatis:
   type-aliases-package: com.bootdo    #mybatis包
   configuration:
     mapUnderscoreToCamelCase: true    # 自动转驼峰
+
+logging:
+  config: classpath:logback-spring.xml
+  level:
+    com.bootdo: debug
