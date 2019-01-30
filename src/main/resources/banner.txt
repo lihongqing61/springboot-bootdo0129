@@ -20,3 +20,4 @@ ${AnsiColor.BRIGHT_YELLOW}
     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
         佛祖保佑       永不宕机       永无BUG
      端口号: ${server.port}
+     项目名: ${server.servlet.context-path}

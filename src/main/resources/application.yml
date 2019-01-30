@@ -1,6 +1,7 @@
 server:
   port: 8080
-
+#  servlet:
+#    context-path: /bootdo
 # 过时
 security:
   base:
