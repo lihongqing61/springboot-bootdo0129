@@ -1,0 +1,14 @@
+server:
+  port: 8080
+
+# 过时
+security:
+  base:
+    enabled: false
+spring:
+  thymeleaf:
+    cache: false        # 禁用缓存
+    mode: LEGACYHTML5   # 非严谨型检查 默认是html 严格检查
+  profiles:
+    active:
+      - dev
