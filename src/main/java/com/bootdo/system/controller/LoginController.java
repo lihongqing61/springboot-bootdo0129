@@ -68,4 +68,9 @@ public class LoginController extends BaseController {
         }
         return Result.ok();
     }
+
+    @GetMapping("/index")
+    public String index() {
+        return null;
+    }
 }

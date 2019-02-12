@@ -99,68 +99,7 @@
 <script src="/js/plugins/validate/jquery.validate.min.js" th:src="@{/js/plugins/validate/jquery.validate.min.js}"></script>
 <script src="/js/plugins/validate/messages_zh.min.js" th:src="@{/js/plugins/validate/messages_zh.min.js}"></script>
 <script src="/js/plugins/layer/layer.min.js" th:src="@{/js/plugins/layer/layer.min.js}"></script>
+<script src="/js/appjs/login.js" th:src="@{/js/appjs/login.js}"></script>
 
-<script type="text/javascript">
-    $(function() {
-        $("#login").click(function() {
-            $("#signupForm").submit();
-        });
-        validateRule();
-    });
-
-    function validateRule() {
-        var icon = "<i class='fa fa-times-circle'></i> ";
-        $("#signupForm").validate({
-            rules: {
-                username: {
-                    required: true
-                },
-                password: {
-                    required: true
-                }
-            },
-
-            messages: {
-                rules: {
-                    username: {
-                        required: icon + "请输入用户名"
-                    },
-                    password: {
-                        required: icon + "请输入密码"
-                    }
-                }
-            }
-        });
-    };
-
-    $.validator.setDefaults({
-        submitHandler: function() {
-            login();
-        }
-    });
-
-    function login() {
-        /*
-        $.post(ctx + "/login", $("#signupForm").serialize(), function(r) {
-
-        }, 'json');
-        */
-        $.ajax({
-            type: "POST",
-            url: ctx+"login",
-            data: $('#signupForm').serialize(),
-            success: function (r) {
-                if (r.code == 1) {
-                    var index = layer.load(1, {
-                        shade: [0.1,'#fff'] //0.1透明度的白色背景
-                    });
-                    layer.msg(r.msg);
-                } else {
-                    layer.msg(r.msg);
-                }
-            },
-        });
-    }
-</script>
 </body>
 </html>
